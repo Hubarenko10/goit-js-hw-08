@@ -1,11 +1,8 @@
 import throttle from 'lodash.throttle'; 
-var throttle = require('lodash.throttle');
+const throttle = require('lodash.throttle');
 const email = document.querySelector('input[name = "email"]');
-console.log(email);
 const message = document.querySelector('textarea[name = "message"]');
-console.log(message);
 const form = document.querySelector('.feedback-form');
-console.log(form);
 const LOCALSTORAGE_KEY = 'feedback-form-state';
 
 form.addEventListener('input', throttle(e => {
@@ -15,9 +12,18 @@ form.addEventListener('input', throttle(e => {
 
 form.addEventListener('submit', e => {
     e.preventDefault();
-    localStorage.removeItem(LOCALSTORAGE_KEY);
-    form.reset();
-    console.log({ email: email.value, message: message.value });
+     if (email.value === '' || message.value === '') {
+    alert('You should to fill an empty field')
+  } 
+   const userData = {
+    Email: email.value,
+    message: message.value
+  }
+  console.log(userData);
+  localStorage.removeItem(LOCALSTORAGE_KEY);
+  form.reset();
+ 
+
 })
 const load = key => {
   try {
